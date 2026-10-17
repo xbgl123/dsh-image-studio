@@ -1,0 +1,79 @@
+{
+  "name": "dsh-image-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Image-generation model access area plus the automatic scheduler and prompt translation layer for the DSH Models settings page.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "src/**/*.mjs",
+    "cordis.patch.yml",
+    "icon.svg",
+    "locale/*.json",
+    "design.md"
+  ],
+  "scripts": {
+    "smoke": "node smoke.mjs",
+    "check:core": "node checks/intent.mjs && node checks/params.mjs && node checks/prompt.mjs && node checks/adapters.mjs && node checks/router.mjs && node checks/generate.mjs && node checks/resilience.mjs",
+    "check:host": "node smoke.mjs && node checks/host-wiring.mjs",
+    "check:ui": "node checks/locale-keys.mjs && node checks/render-section.mjs && node checks/interactions.mjs",
+    "check:secret": "node checks/secret-roundtrip.mjs && node checks/secret-persist.mjs && node checks/settings-service.mjs && node checks/secret-indicator.mjs && node checks/save-secret-e2e.mjs",
+    "check:live": "node checks/live-config-read.mjs",
+    "check:package": "node checks/package.mjs",
+    "pack": "node checks/package.mjs && node \"C:/Program Files/nodejs/node_modules/npm/bin/npm-cli.js\" pack",
+    "check": "node smoke.mjs && node checks/intent.mjs && node checks/params.mjs && node checks/prompt.mjs && node checks/adapters.mjs && node checks/router.mjs && node checks/generate.mjs && node checks/resilience.mjs && node checks/host-wiring.mjs && node checks/locale-keys.mjs && node checks/render-section.mjs && node checks/interactions.mjs && node checks/secret-roundtrip.mjs && node checks/secret-persist.mjs && node checks/settings-service.mjs && node checks/secret-indicator.mjs && node checks/save-secret-e2e.mjs && node checks/live-config-read.mjs && node checks/package.mjs"
+  },
+  "icon": "./icon.svg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xbgl123/dsh-image-studio.git"
+  },
+  "homepage": "https://github.com/xbgl123/dsh-image-studio#readme",
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "image",
+    "image-generation",
+    "text-to-image",
+    "client-plugin",
+    "zh",
+    "en"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "meta": {
+    "title": "Image Generation Model Studio",
+    "description": "Adds an image-generation model access area, automatic scheduling, and prompt translation to the Models settings page."
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.4"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "~3.18.4"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": false,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-api-remotes"
+      ]
+    }
+  }
+}

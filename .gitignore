@@ -1,0 +1,7 @@
+# Development artifact of `smoke.mjs`: it links the DSH installation's
+# `@deepseek-ai/schemastery` beside the package so the Host half can be imported
+# outside the profile. The profile's own install has no such directory.
+node_modules/
+
+# Build artifact of `npm run pack`; the tarball is a deliverable, not source.
+*.tgz

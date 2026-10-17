@@ -1,0 +1,5 @@
+# Normalize line endings so a clone on any platform produces the same bytes.
+* text=auto
+
+# Credentials and build artifacts never belong in history.
+*.tgz binary

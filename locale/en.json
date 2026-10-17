@@ -1,0 +1,4 @@
+{
+  "title": "Image Generation Model Studio",
+  "description": "Adds an image-generation model access area to the Models settings page and wires image generation into the conversation."
+}
